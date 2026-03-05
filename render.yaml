@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: text-leech-bot
+    env: python
+    plan: free
+    pythonVersion: "3.10.13"
+    # ✅ Fixed: ffmpeg aur aria2c install karo — render pe by default nahi hote
+    buildCommand: |
+      apt-get install -y ffmpeg aria2 wget 2>/dev/null || true
+      pip install -r requirements.txt
+    startCommand: bash start.sh
+    envVars:
+      - key: API_ID
+        sync: false
+      - key: API_HASH
+        sync: false
+      - key: BOT_TOKEN
+        sync: false
+      - key: OWNER_ID
+        sync: false
+      - key: SUDO_USERS
+        sync: false
+      - key: WEBHOOK
+        value: "False"
+      - key: PORT
+        value: "10000"

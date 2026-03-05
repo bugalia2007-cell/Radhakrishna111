@@ -1,0 +1,10 @@
+pyrogram==2.0.106
+pyromod==1.5
+TgCrypto
+aiohttp
+aiofiles
+requests
+flask
+gunicorn
+python-dotenv
+yt-dlp
