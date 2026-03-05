@@ -18,7 +18,7 @@ from utils import progress_bar
 from aiohttp import ClientSession
 from subprocess import getstatusoutput
 
-from pyrogram import Client, filters
+from pyrogram import Client, filters, idle
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import FloodWait
 import pyromod.listen   # ✅ Fixed: bot.listen() ke liye zaroori
@@ -323,7 +323,9 @@ async def main():
         print("==> Bot connecting...")
         await bot.start()
         print("==> ✅ Bot connected successfully!")
-        await asyncio.Event().wait()
+        # ✅ Fixed: asyncio.Event().wait() → pyrogram idle()
+        # asyncio.Event() se handlers respond nahi karte the
+        await idle()
     except Exception as e:
         print(f"==> ❌ Bot ERROR: {e}")
         raise
